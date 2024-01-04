@@ -11,15 +11,12 @@ class Main(WindowLoop):
     def update_events(self, __event) -> None:
         if __event.type == KEYDOWN:
             Grid.update_grid()    
-            print(Grid.__dict__)
         
         else:
             super().update_events(__event)
     
     def main(self) -> None:
-        # pprint(Math.generate_with_chance(50, Vec2(10, 10)))
         Grid.random_generate_grid(50, Vec2(50, 50))
-        print(Grid.__dict__)
 
         while True: # mainloop
             
