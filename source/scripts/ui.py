@@ -24,5 +24,10 @@ class Pause(StaticSprite):
                 self.image = self.paused_image
                 self.__is_paused = True
     
-    def get_pause_option(self) -> bool:
+    @property
+    def pause_option(self) -> bool:
         return self.__is_paused
+    
+    @pause_option.setter
+    def pause_option(self, __other: bool) -> None:
+        self.__is_paused = __other

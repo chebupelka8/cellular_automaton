@@ -1,6 +1,6 @@
 from Engine import *
 from numpy import random
-from scripts.config import B, S
+from scripts.config import *
 import copy
 
 
@@ -58,14 +58,14 @@ class Math:
                 neighbors = cls.find_neighbors(Vec2(y, x), __array)
 
                 if __array[y][x] == 1:
-                    if neighbors in S:
+                    if neighbors in get_rules()[1]:
                         __next_generation[y][x] = 1
                     else:
                         __next_generation[y][x] = 0
 
                 if __array[y][x] == 0:
-                    if neighbors in B:
+                    if neighbors in get_rules()[0]:
                         __next_generation[y][x] = 1
         
-        return copy.deepcopy(__next_generation)
+        return __next_generation
 

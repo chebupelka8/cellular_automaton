@@ -52,6 +52,10 @@ class Grid:
     @classmethod
     def get(cls) -> list:
         return cls.__current_grid
+    
+    @classmethod
+    def clear(cls) -> None:
+        cls.__current_grid.set(Math.generate_grid(Vec2(cls.__current_grid.size, cls.__current_grid.size)))
 
     @classmethod
     def random_generate_grid(cls, __chance: int, __size: Vec2) -> None:
