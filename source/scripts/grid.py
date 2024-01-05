@@ -1,7 +1,5 @@
 from Engine import *
 from scripts.algorithms import Math
-import copy
-from scripts.config import *
 
 
 class ObjectGrid:
