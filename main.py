@@ -1,5 +1,5 @@
 from scripts import *
-from widgets import *
+# from widgets import *
 
 
 class Main(WindowLoop):

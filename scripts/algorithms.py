@@ -1,4 +1,4 @@
-from numpy import random
+import random
 from Engine import *
 from scripts.config import B, S
 import copy
