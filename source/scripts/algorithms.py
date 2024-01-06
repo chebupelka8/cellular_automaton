@@ -1,6 +1,6 @@
-from Engine import *
 from numpy import random
-from scripts.config import *
+from Engine import *
+from scripts.config import B, S
 import copy
 
 
@@ -13,7 +13,7 @@ class Math:
         neighbors = []
         for i in range(row - 1, row + 2):
             for j in range(col - 1, col + 2):
-                if 0 <= i < len(__arr) and j >= 0 and j < len(__arr[0]) and (i != row or j != col):
+                if not (not (0 <= i < len(__arr)) or not (j >= 0) or not (j < len(__arr[0]))) and (i != row or j != col):
                     neighbors.append(__arr[i][j])
 
         return sum(neighbors) 
@@ -30,7 +30,7 @@ class Math:
         match __arg:
             case arg if not isinstance(arg, int):
                 raise TypeError("Argument must be 'int'")
-            case arg if not arg in range(0, 101):
+            case arg if arg not in range(0, 101):
                 raise ValueError("Number must be in the range from 0 to 100")
         
         return [
@@ -57,15 +57,14 @@ class Math:
             for x in range(len(__array[y])):
                 neighbors = cls.find_neighbors(Vec2(y, x), __array)
 
+                if __array[y][x] == 0:
+                    if neighbors in B:
+                        __next_generation[y][x] = 1
+
                 if __array[y][x] == 1:
-                    if neighbors in get_rules()[1]:
+                    if neighbors in S:
                         __next_generation[y][x] = 1
                     else:
                         __next_generation[y][x] = 0
 
-                if __array[y][x] == 0:
-                    if neighbors in get_rules()[0]:
-                        __next_generation[y][x] = 1
-        
         return __next_generation
-

@@ -1,8 +1,8 @@
 import pygame
 from typing import Any
 import os
-from Engine.scripts.exceptions import ImageLoadError
-from Engine.scripts.math import Vec2
+from .exceptions import ImageLoadError
+from .math import Vec2
 
 
 class Image:
@@ -46,7 +46,7 @@ class Animation:
         if isinstance(__dir, str):
             return [Image(f"{__dir}/{p}").image for p in os.listdir(__dir)]
         elif all(map(lambda obj: isinstance(obj, str), __dir)):
-            return [Image(p) for p in __dir]
+            return [Image(p).image for p in __dir]
         elif all(map(lambda obj: isinstance(obj, pygame.Surface), __dir)):
             return __dir
         elif all(map(lambda obj: isinstance(obj, Image), __dir)):
@@ -92,11 +92,12 @@ class Animation:
         return self.directory[__index]
 
 class ImageEditor:
-
     @staticmethod
     def __verify_image(__image: Any) -> None:
-        if not isinstance(__image, Image): raise TypeError("Argument should be an instance of the 'Image' class")
-    
+        if not isinstance(__image, Image):
+            return
+            # raise TypeError(f"Argument should be an instance of the 'Image' class not {type(__image)}")
+
     @classmethod
     def rotate(cls, __image: Image, degrees: int) -> Image:
         cls.__verify_image(__image)
@@ -151,7 +152,9 @@ class AnimationEditor:
 
     @staticmethod
     def __verify_animation(__animation) -> None:
-        if not isinstance(__animation, Animation): raise TypeError("Argument should be an instance of the 'Animation' class")
+        if not isinstance(__animation, Animation):
+            ...
+            # raise TypeError("Argument should be an instance of the 'Animation' class")
 
     @classmethod
     def rotate(cls, __animation: Animation, degrees: int) -> Animation:

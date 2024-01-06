@@ -46,11 +46,12 @@ class ObjectGrid:
     def __getitem__(self, __index: int) -> int:
         return self.__matrix[__index]
 
+
 class Grid:
-    __current_grid = ObjectGrid([[1]])
+    __current_grid = ObjectGrid(Math.generate_grid(Vec2(100, 100)))
     
     @classmethod
-    def get(cls) -> list:
+    def get(cls) -> ObjectGrid:
         return cls.__current_grid
     
     @classmethod
@@ -70,7 +71,7 @@ class Grid:
         cls.__current_grid.set(Math.next_generation(cls.__current_grid.get()))
 
     @classmethod
-    def draw_grid_lines(cls, loop: WindowLoop, __size: Vec2 = None) -> None:
+    def draw_grid_lines(cls, loop: WindowLoop, __size: Vec2 | None = None) -> None:
         if __size == None:
             __size = Vec2(len(cls.__current_grid), len(cls.__current_grid))
 

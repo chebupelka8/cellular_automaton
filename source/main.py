@@ -1,10 +1,9 @@
-from Engine import *
-import threading
 from PySide6.QtWidgets import QApplication
-from widgets.widget import MainWidget
+
+from scripts.config import *
 from scripts.grid import Grid
 from scripts.ui import Pause
-from scripts.config import *
+from widgets.widget import MainWidget
 
 
 class Main(WindowLoop):
@@ -12,6 +11,7 @@ class Main(WindowLoop):
         super().__init__(WINDOW_SIZE, 165)
 
         self.set_window_icon(Image("source/assets/icon.png", False))
+        self.pause = Pause(Vec2(10, 10))
     
     def update_events(self, __event) -> None:
         if __event.type == KEYDOWN:
@@ -38,10 +38,9 @@ class Main(WindowLoop):
             super().update_events(__event)
     
     def main(self) -> None:
-        self.pause = Pause(Vec2(10, 10))
-
-        while True: # mainloop
-            if not self.pause.pause_option: Grid.update_grid()
+        while True:
+            if not self.pause.pause_option:
+                Grid.update_grid()
             
             Grid.draw_grid(self)
             Grid.draw_grid_lines(loop=self)
@@ -49,7 +48,6 @@ class Main(WindowLoop):
             self.pause.draw(self.display)
 
             self.update_display()
-            
 
 
 if __name__ == "__main__":
@@ -61,7 +59,7 @@ if __name__ == "__main__":
 
         app.exec()
     
-    threading.Thread(target=application).start()
+    # threading.Thread(target=application).start()
     Main().main()
     
     
