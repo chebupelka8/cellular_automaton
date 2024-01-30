@@ -1,3 +1,2 @@
 # cellular_automaton
-...
--_-
+._.
